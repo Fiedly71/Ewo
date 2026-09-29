@@ -8,7 +8,7 @@ export function ProductCard({ product }: { product: Product }) {
   const from = Math.min(...product.variants.map((v) => v.price));
   return (
     <Link href={`/produits/${product.id}`} className="group block">
-      <div className="relative aspect-square overflow-hidden rounded-xl bg-black/5">
+      <div className="relative aspect-square overflow-hidden rounded-xl bg-surface">
         {image && (
           <Image
             src={image.src}
@@ -20,7 +20,7 @@ export function ProductCard({ product }: { product: Product }) {
         )}
       </div>
       <h3 className="mt-3 font-semibold">{product.title}</h3>
-      {Number.isFinite(from) && <p className="text-sm text-black/60">dès {formatPrice(from)}</p>}
+      {Number.isFinite(from) && <p className="text-sm text-muted">dès {formatPrice(from)}</p>}
     </Link>
   );
 }

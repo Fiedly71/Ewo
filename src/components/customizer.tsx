@@ -77,7 +77,7 @@ export function Customizer({ bases }: { bases: Base[] }) {
 
   return (
     <div className="mt-8 grid gap-10 md:grid-cols-2">
-      <svg viewBox="0 0 256 256" className="w-full rounded-2xl bg-black/5" role="img" aria-label="Aperçu du vêtement">
+      <svg viewBox="0 0 256 256" className="w-full rounded-2xl bg-surface" role="img" aria-label="Aperçu du vêtement">
         <path d={SHAPES[base.slug] ?? SHAPES["t-shirt"]} fill={fill} stroke="#00000033" strokeWidth="2" />
         {design && <image href={design.url} x="88" y="80" width="80" height="100" preserveAspectRatio="xMidYMid meet" />}
         {!design && (
@@ -93,18 +93,18 @@ export function Customizer({ bases }: { bases: Base[] }) {
 
         <div>
           <p className="mb-2 text-sm font-semibold">Votre image (devant)</p>
-          <label className="flex cursor-pointer items-center justify-center rounded-xl border-2 border-dashed border-black/20 p-6 text-sm hover:border-black">
+          <label className="flex cursor-pointer items-center justify-center rounded-xl border-2 border-dashed border-line p-6 text-sm hover:border-accent">
             <input type="file" accept="image/png,image/jpeg" className="sr-only"
               onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />
             {uploading ? "Téléversement…" : design ? `✓ ${design.name} (changer)` : "Choisir une image PNG ou JPG"}
           </label>
-          <p className="mt-2 text-xs text-black/50">Pour une impression nette, utilisez une image d&apos;au moins 2000 px de large.</p>
-          {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+          <p className="mt-2 text-xs text-muted">Pour une impression nette, utilisez une image d&apos;au moins 2000 px de large.</p>
+          {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
         </div>
 
         <p className="text-xl font-semibold">{formatPrice(base.price)}</p>
         <button type="button" onClick={handleAdd} disabled={!variant || !design || uploading}
-          className="w-full rounded-full bg-black py-4 font-semibold text-white disabled:opacity-40">
+          className="w-full rounded-full bg-accent py-4 font-semibold text-accent-fg disabled:opacity-40">
           {added ? "Ajouté au panier ✓" : design ? "Ajouter au panier" : "Ajoutez d'abord une image"}
         </button>
       </div>
@@ -121,7 +121,7 @@ function Choice({ label, values, labels, value, onChange }: {
       <div className="flex flex-wrap gap-2">
         {values.map((v) => (
           <button key={v} type="button" onClick={() => onChange(v)}
-            className={`rounded-full border px-4 py-2 text-sm ${value === v ? "border-black bg-black text-white" : "border-black/20 hover:border-black"}`}>
+            className={`rounded-full border px-4 py-2 text-sm ${value === v ? "border-accent bg-accent text-accent-fg" : "border-line hover:border-accent"}`}>
             {labels?.[v] ?? v}
           </button>
         ))}

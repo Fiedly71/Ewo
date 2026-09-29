@@ -44,7 +44,7 @@ export function AddToCart({ product }: { product: Product }) {
 
   return (
     <div className="grid gap-10 md:grid-cols-2">
-      <div className="relative aspect-square overflow-hidden rounded-2xl bg-black/5">
+      <div className="relative aspect-square overflow-hidden rounded-2xl bg-surface">
         {image && <Image src={image.src} alt={product.title} fill priority sizes="50vw" className="object-cover" />}
       </div>
       <div>
@@ -63,7 +63,7 @@ export function AddToCart({ product }: { product: Product }) {
                     type="button"
                     onClick={() => choose(oi, v.id)}
                     className={`rounded-full border px-4 py-2 text-sm ${
-                      selected[oi] === v.id ? "border-black bg-black text-white" : "border-black/20 hover:border-black"
+                      selected[oi] === v.id ? "border-accent bg-accent text-accent-fg" : "border-line hover:border-accent"
                     }`}
                   >
                     {v.title}
@@ -77,13 +77,13 @@ export function AddToCart({ product }: { product: Product }) {
           type="button"
           onClick={handleAdd}
           disabled={!variant || !variant.available}
-          className="mt-8 w-full rounded-full bg-black py-4 font-semibold text-white disabled:opacity-40"
+          className="mt-8 w-full rounded-full bg-accent py-4 font-semibold text-accent-fg disabled:opacity-40"
         >
           {!variant || !variant.available ? "Indisponible" : added ? "Ajouté au panier ✓" : "Ajouter au panier"}
         </button>
 
         <div
-          className="prose mt-8 text-sm text-black/70"
+          className="prose mt-8 text-sm text-muted"
           // La description vient de la boutique Printify du propriétaire du site.
           dangerouslySetInnerHTML={{ __html: product.description }}
         />

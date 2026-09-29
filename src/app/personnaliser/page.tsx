@@ -19,7 +19,7 @@ export default async function CustomizePage() {
     <>
       <DemoBanner />
       <h1 className="text-3xl font-black">Personnaliser un vêtement</h1>
-      <p className="mt-2 text-black/60">Choisissez le vêtement, la couleur et la taille, puis ajoutez votre image.</p>
+      <p className="mt-2 text-muted">Choisissez le vêtement, la couleur et la taille, puis ajoutez votre image.</p>
       <Customizer bases={bases.filter((b) => b.variants.length > 0)} />
     </>
   );

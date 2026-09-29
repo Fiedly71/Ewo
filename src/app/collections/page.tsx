@@ -11,7 +11,7 @@ export default async function CollectionsPage() {
     <>
       <DemoBanner />
       <h1 className="text-3xl font-black">Collections</h1>
-      {collections.length === 0 && <p className="mt-6 text-black/60">Aucun produit pour le moment.</p>}
+      {collections.length === 0 && <p className="mt-6 text-muted">Aucun produit pour le moment.</p>}
       {collections.map((c) => (
         <section key={c.name} className="mt-10">
           <h2 className="mb-5 text-xl font-bold">{c.name}</h2>
