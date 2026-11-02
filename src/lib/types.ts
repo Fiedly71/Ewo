@@ -20,6 +20,8 @@ export type Product = {
   options: ProductOption[];
   variants: ProductVariant[];
   tags: string[];
+  /** Date de création ISO (sert au tri « Nouveautés » et au badge « Nouveau »). */
+  createdAt?: string;
 };
 
 /** Vêtement vierge que le client peut personnaliser. */

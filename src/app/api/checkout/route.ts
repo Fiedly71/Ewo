@@ -84,6 +84,7 @@ export async function POST(request: Request) {
     mode: "payment",
     line_items: lineItems,
     phone_number_collection: { enabled: true },
+    allow_promotion_codes: true, // codes promo créés dans Stripe > Catalogue de produits > Coupons
     success_url: `${config.siteUrl}/commande/merci?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${config.siteUrl}/panier`,
     locale: "fr",

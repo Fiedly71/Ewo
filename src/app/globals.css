@@ -1,36 +1,64 @@
 @import "tailwindcss";
 
-/* Thème sombre par défaut, thème clair via <html data-theme="light">. */
+/*
+ * Thème clair par défaut (style boutique Shopify), thème sombre si le système
+ * le demande ou via <html data-theme="dark">.
+ */
 :root {
+  --bg: #ffffff;
+  --surface: #f5f4f1;
+  --surface-2: #ece9e3;
+  --fg: #121212;
+  --muted: #6b6862;
+  --line: #e6e3dd;
+  --accent: #e8680c;
+  --accent-fg: #ffffff;
+  --success: #1f8a4c;
+  --danger: #c0392b;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
   --bg: #0e0e10;
-  --surface: #1a1a1e;
+  --surface: #18181b;
+  --surface-2: #232328;
   --fg: #f5f3ef;
   --muted: #a3a09a;
-  --line: #2c2c31;
+  --line: #2a2a2f;
   --accent: #f47a1f;
   --accent-fg: #ffffff;
+  --success: #3fbf72;
+  --danger: #ef6b5b;
   color-scheme: dark;
 }
 
-:root[data-theme="light"] {
-  --bg: #faf8f4;
-  --surface: #ffffff;
-  --fg: #16161a;
-  --muted: #6b6760;
-  --line: #e6e1d8;
-  --accent: #e8680c;
-  --accent-fg: #ffffff;
-  color-scheme: light;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e0e10;
+    --surface: #18181b;
+    --surface-2: #232328;
+    --fg: #f5f3ef;
+    --muted: #a3a09a;
+    --line: #2a2a2f;
+    --accent: #f47a1f;
+    --accent-fg: #ffffff;
+    --success: #3fbf72;
+    --danger: #ef6b5b;
+    color-scheme: dark;
+  }
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-fg: var(--fg);
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-accent: var(--accent);
   --color-accent-fg: var(--accent-fg);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
   --font-sans: var(--font-geist-sans);
 }
 
@@ -38,4 +66,128 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+@layer components {
+  .page {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 768px) {
+    .page {
+      padding-inline: 2rem;
+    }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.925rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    transition: opacity 0.15s, background-color 0.15s, border-color 0.15s, transform 0.15s;
+    cursor: pointer;
+  }
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .btn:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+  .btn-primary {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .btn-primary:hover:not(:disabled) {
+    opacity: 0.86;
+  }
+  .btn-accent {
+    background: var(--accent);
+    color: var(--accent-fg);
+  }
+  .btn-accent:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+  .btn-outline {
+    border: 1px solid var(--fg);
+    color: var(--fg);
+  }
+  .btn-outline:hover:not(:disabled) {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .field {
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    padding: 0.75rem 0.9rem;
+    font-size: 0.925rem;
+    outline: none;
+  }
+  .field:focus {
+    border-color: var(--fg);
+  }
+
+  /* Contenu HTML des descriptions produit et des pages légales. */
+  .rte p + p,
+  .rte p + ul,
+  .rte ul + p {
+    margin-top: 0.75rem;
+  }
+  .rte ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+  .rte li + li {
+    margin-top: 0.25rem;
+  }
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details[open] .chevron {
+  transform: rotate(180deg);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+dialog::backdrop {
+  background: rgb(0 0 0 / 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

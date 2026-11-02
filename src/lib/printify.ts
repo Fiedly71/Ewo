@@ -27,6 +27,7 @@ type RawProduct = {
   description: string;
   tags: string[];
   visible: boolean;
+  created_at?: string;
   images: { src: string; variant_ids: number[]; is_default: boolean }[];
   options: { name: string; values: { id: number; title: string }[] }[];
   variants: {
@@ -45,6 +46,7 @@ function toProduct(p: RawProduct): Product {
     title: p.title,
     description: p.description,
     tags: p.tags ?? [],
+    createdAt: p.created_at ? new Date(p.created_at.replace(" ", "T")).toISOString() : undefined,
     images: p.images.map((i) => ({ src: i.src, variantIds: i.variant_ids, isDefault: i.is_default })),
     options: p.options.map((o) => ({ name: o.name, values: o.values })),
     variants: p.variants
