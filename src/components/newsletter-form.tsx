@@ -30,7 +30,7 @@ export function NewsletterForm({ source = "footer", dark }: { source?: string; d
   if (status === "done") return <p className="text-sm font-medium">{message}</p>;
   return (
     <form onSubmit={submit} className="w-full">
-      <div className={`flex items-center rounded-lg border ${dark ? "border-white/30" : "border-line bg-bg"} focus-within:border-current`}>
+      <div className={`flex items-center border ${dark ? "border-white/30" : "border-line bg-bg"} focus-within:border-current`}>
         <label htmlFor={`nl-${source}`} className="sr-only">Adresse email</label>
         <input
           id={`nl-${source}`}

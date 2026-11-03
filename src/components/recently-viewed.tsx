@@ -25,11 +25,11 @@ export function RecentlyViewed({ current }: { current: ProductSnapshot }) {
   if (items.length === 0) return null;
   return (
     <section className="page mt-20">
-      <h2 className="text-2xl font-bold tracking-tight">Vus récemment</h2>
+      <h2 className="text-2xl">Vus récemment</h2>
       <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4">
         {items.map((p) => (
           <Link key={p.id} href={`/produits/${p.id}`} className="group">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-surface">
+            <div className="relative aspect-[4/5] overflow-hidden bg-surface">
               {p.image && <Image src={p.image} alt={p.title} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition duration-500 group-hover:scale-105" />}
             </div>
             <p className="mt-3 text-sm font-medium">{p.title}</p>

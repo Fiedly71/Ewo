@@ -62,7 +62,7 @@ export function CartDrawer() {
           <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 text-center">
             <p className="text-lg font-semibold">Votre panier est vide</p>
             <p className="text-sm text-muted">Trouvez votre prochaine pièce préférée ou créez la vôtre.</p>
-            <Link href="/collections/tous" tabIndex={drawerOpen ? 0 : -1} className="btn btn-primary mt-2 w-full max-w-xs">
+            <Link href="/collections/tous" tabIndex={drawerOpen ? 0 : -1} className="btn mt-2 w-full max-w-xs">
               Découvrir la boutique
             </Link>
             <Link href="/personnaliser" tabIndex={drawerOpen ? 0 : -1} className="btn btn-outline w-full max-w-xs">
@@ -84,7 +84,7 @@ export function CartDrawer() {
               <p className="text-xs text-muted">
                 Taxes incluses. Livraison vers l&apos;adresse Ewo prédéfinie. Codes promo acceptés au paiement.
               </p>
-              <button type="button" onClick={() => checkout(items)} disabled={loading} className="btn btn-primary w-full">
+              <button type="button" onClick={() => checkout(items)} disabled={loading} className="btn w-full">
                 {loading ? "Redirection vers le paiement…" : "Passer au paiement"}
               </button>
               {error && <p className="text-sm text-danger" role="alert">{error}</p>}

@@ -120,7 +120,7 @@ export default async function ProductPage({ params, searchParams }: PageProps<"/
 
       {related.length > 0 && (
         <section className="page mt-20">
-          <h2 className="text-2xl font-bold tracking-tight">Vous aimerez aussi</h2>
+          <h2 className="text-2xl">Vous aimerez aussi</h2>
           <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-4">
             {related.map((p) => (
               <ProductCard key={p.id} product={p} />

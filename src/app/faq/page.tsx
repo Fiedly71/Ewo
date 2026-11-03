@@ -51,7 +51,7 @@ export default function FaqPage() {
   return (
     <div className="page max-w-3xl py-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
-      <h1 className="text-4xl font-bold tracking-tight md:text-5xl">Questions fréquentes</h1>
+      <h1 className="text-3xl md:text-[40px]">Questions fréquentes</h1>
       <p className="mt-3 text-muted">
         Vous ne trouvez pas votre réponse ?{" "}
         <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="text-fg underline underline-offset-4">Écrivez-nous sur WhatsApp</a>{" "}

@@ -23,7 +23,7 @@ export default async function CollectionPage({ params, searchParams }: PageProps
   return (
     <div className="page py-10">
       <Breadcrumbs items={[{ href: "/", label: "Accueil" }, { href: "/collections", label: "Collections" }, { label: collection.name }]} />
-      <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">{collection.name}</h1>
+      <h1 className="mt-4 text-3xl md:text-[40px]">{collection.name}</h1>
       <DemoBanner className="mt-6" />
       <div className="mt-8">
         <ProductListing products={collection.items} searchParams={await searchParams} basePath={`/collections/${slug}`} />

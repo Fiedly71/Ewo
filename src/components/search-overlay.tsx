@@ -87,8 +87,8 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
                 <ul className="grid gap-2 sm:grid-cols-2">
                   {shown.map((p) => (
                     <li key={p.id}>
-                      <Link href={`/produits/${p.id}`} onClick={onClose} className="flex items-center gap-4 rounded-lg p-2 hover:bg-surface">
-                        <span className="relative h-16 w-14 shrink-0 overflow-hidden rounded-md bg-surface">
+                      <Link href={`/produits/${p.id}`} onClick={onClose} className="flex items-center gap-4 p-2 hover:bg-surface">
+                        <span className="relative h-16 w-14 shrink-0 overflow-hidden bg-surface">
                           {p.image && <Image src={p.image} alt="" fill sizes="56px" className="object-cover" />}
                         </span>
                         <span>

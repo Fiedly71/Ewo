@@ -44,11 +44,11 @@ export function AddToCart({ product }: { product: Product }) {
 
   return (
     <div className="grid gap-10 md:grid-cols-2">
-      <div className="relative aspect-square overflow-hidden rounded-2xl bg-surface">
+      <div className="relative aspect-square overflow-hidden bg-surface">
         {image && <Image src={image.src} alt={product.title} fill priority sizes="50vw" className="object-cover" />}
       </div>
       <div>
-        <h1 className="text-3xl font-black">{product.title}</h1>
+        <h1 className="text-3xl font-normal">{product.title}</h1>
         {variant && <p className="mt-2 text-xl">{formatPrice(variant.price)}</p>}
 
         {product.options.map((option, oi) => (

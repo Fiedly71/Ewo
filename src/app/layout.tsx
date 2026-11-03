@@ -1,6 +1,6 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
+import { Assistant } from "next/font/google";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { CartDrawer } from "@/components/cart-drawer";
 import { CartProvider } from "@/components/cart-provider";
@@ -12,9 +12,10 @@ import { getCollections } from "@/lib/catalog";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const assistant = Assistant({
+  variable: "--font-assistant",
   subsets: ["latin"],
+  weight: ["400", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -33,24 +34,15 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0e0e10" },
-  ],
+  themeColor: "#e8680c",
 };
-
-// Applique le thème choisi avant l'affichage, pour éviter un flash de couleur.
-const themeScript = `try{var t=localStorage.getItem("ewo-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}`;
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   const collections = (await getCollections().catch(() => [])).map((c) => ({ slug: c.slug, name: c.name, count: c.items.length }));
   return (
-    <html lang="fr" className={`${geistSans.variable} h-full antialiased`} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
+    <html lang="fr" className={`${assistant.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
-        <a href="#contenu" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:rounded focus:bg-fg focus:px-3 focus:py-2 focus:text-bg">
+        <a href="#contenu" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus: focus:bg-fg focus:px-3 focus:py-2 focus:text-bg">
           Aller au contenu
         </a>
         <CartProvider>

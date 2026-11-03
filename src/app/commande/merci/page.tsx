@@ -18,7 +18,7 @@ export default async function ThanksPage({ searchParams }: PageProps<"/commande/
     <div className="page max-w-2xl py-16 text-center">
       <ClearCart />
       <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-success/15 text-3xl text-success">✓</div>
-      <h1 className="mt-6 text-4xl font-bold tracking-tight">Merci pour votre commande !</h1>
+      <h1 className="mt-6 text-3xl md:text-[40px]">Merci pour votre commande !</h1>
       <p className="mt-4 text-muted">
         {demo
           ? "Mode démo : aucun paiement n'a été pris et aucune commande n'a été envoyée à Printify."
@@ -27,7 +27,7 @@ export default async function ThanksPage({ searchParams }: PageProps<"/commande/
       {ref && <p className="mt-2 text-sm">Référence : <span className="font-mono font-semibold">{ref}</span></p>}
       <ol className="mt-10 space-y-4 text-left">
         {steps.map((s, i) => (
-          <li key={s.title} className="flex gap-4 rounded-xl border border-line p-5">
+          <li key={s.title} className="flex gap-4 border border-line p-5">
             <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-fg text-sm font-bold text-bg">{i + 1}</span>
             <div>
               <p className="font-semibold">{s.title}</p>
@@ -37,7 +37,7 @@ export default async function ThanksPage({ searchParams }: PageProps<"/commande/
         ))}
       </ol>
       <div className="mt-10 flex flex-wrap justify-center gap-3">
-        <Link href="/collections/tous" className="btn btn-primary">Continuer mes achats</Link>
+        <Link href="/collections/tous" className="btn">Continuer mes achats</Link>
         <a href={whatsappLink(`Bonjour Ewo, j'ai une question sur ma commande${ref ? ` ${ref}` : ""}.`)} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
           Une question ? WhatsApp
         </a>

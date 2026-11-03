@@ -39,7 +39,7 @@ export function Customizer({ bases }: { bases: Base[] }) {
 
   if (!base) {
     return (
-      <p className="mt-8 rounded-xl border border-line p-8 text-center text-muted">
+      <p className="mt-8 border border-line p-8 text-center text-muted">
         Aucun vêtement personnalisable n&apos;est disponible pour le moment. Revenez bientôt !
       </p>
     );
@@ -87,7 +87,7 @@ export function Customizer({ bases }: { bases: Base[] }) {
   return (
     <div className="grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-14">
       <div className="md:sticky md:top-28 md:self-start">
-        <div className="relative overflow-hidden rounded-2xl bg-surface">
+        <div className="relative overflow-hidden bg-surface">
           <svg viewBox="0 0 256 256" className="w-full" role="img" aria-label={`Aperçu : ${base.title} ${activeColor}`}>
             <ellipse cx="128" cy="248" rx="80" ry="5" fill="#00000012" />
             <path d={SHAPES[base.slug] ?? SHAPES["t-shirt"]} fill={fill} stroke="#00000022" strokeWidth="2" className="transition-[fill] duration-300" />
@@ -107,7 +107,7 @@ export function Customizer({ bases }: { bases: Base[] }) {
 
       <div>
         <p className="eyebrow">Personnalisation</p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Créez votre vêtement</h1>
+        <h1 className="mt-2 h-section">Créez votre vêtement</h1>
         <p className="mt-4 text-2xl">{formatPrice(base.price)}</p>
         <p className="mt-1 text-xs text-muted">Taxes incluses. Imprimé à la demande pour vous.</p>
 
@@ -116,7 +116,7 @@ export function Customizer({ bases }: { bases: Base[] }) {
             <div className="grid grid-cols-2 gap-3">
               {bases.map((b) => (
                 <button key={b.slug} type="button" onClick={() => setBaseSlug(b.slug)} aria-pressed={b.slug === base.slug}
-                  className={`rounded-lg border p-4 text-left text-sm transition ${b.slug === base.slug ? "border-fg ring-1 ring-fg" : "border-line hover:border-fg"}`}>
+                  className={` border p-4 text-left text-sm transition ${b.slug === base.slug ? "border-fg ring-1 ring-fg" : "border-line hover:border-fg"}`}>
                   <span className="block font-medium">{b.title}</span>
                   <span className="text-muted">{formatPrice(b.price)}</span>
                 </button>
@@ -138,7 +138,7 @@ export function Customizer({ bases }: { bases: Base[] }) {
             <div className="flex flex-wrap gap-2">
               {sizes.map((s) => (
                 <button key={s} type="button" onClick={() => setSize(s)} aria-pressed={s === activeSize}
-                  className={`min-w-14 rounded-lg border px-4 py-2.5 text-sm ${s === activeSize ? "border-fg bg-fg text-bg" : "border-line hover:border-fg"}`}>
+                  className={`min-w-14 border px-4 py-2.5 text-sm ${s === activeSize ? "border-fg bg-fg text-bg" : "border-line hover:border-fg"}`}>
                   {s}
                 </button>
               ))}
@@ -155,7 +155,7 @@ export function Customizer({ bases }: { bases: Base[] }) {
                 const file = e.dataTransfer.files?.[0];
                 if (file) upload(file);
               }}
-              className={`flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-8 text-center text-sm transition ${dragging ? "border-accent bg-accent/5" : "border-line hover:border-fg"}`}
+              className={`flex cursor-pointer flex-col items-center justify-center gap-2 border-2 border-dashed p-8 text-center text-sm transition ${dragging ? "border-accent bg-accent/5" : "border-line hover:border-fg"}`}
             >
               <input type="file" accept="image/png,image/jpeg" className="sr-only" onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />
               <UploadIcon className="h-6 w-6 text-muted" />
@@ -173,7 +173,7 @@ export function Customizer({ bases }: { bases: Base[] }) {
 
           <div className="flex gap-3">
             <QuantityStepper value={quantity} onChange={setQuantity} />
-            <button type="button" onClick={handleAdd} disabled={!variant || !design || uploading} className="btn btn-primary flex-1">
+            <button type="button" onClick={handleAdd} disabled={!variant || !design || uploading} className="btn flex-1">
               {design ? `Ajouter au panier · ${formatPrice(base.price * quantity)}` : "Ajoutez d'abord une image"}
             </button>
           </div>

@@ -17,7 +17,7 @@ export function QuantityStepper({
 }) {
   const h = size === "sm" ? "h-9" : "h-12";
   return (
-    <div className={`inline-flex ${h} items-center rounded-lg border border-line`}>
+    <div className={`inline-flex ${h} items-center border border-line`}>
       <button type="button" onClick={() => onChange(Math.max(min, value - 1))} disabled={value <= min} aria-label="Diminuer la quantité" className="grid h-full w-10 place-items-center disabled:opacity-30">
         <MinusIcon />
       </button>

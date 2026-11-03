@@ -11,15 +11,15 @@ export function CartView() {
   const { items, subtotal, loaded } = useCart();
   const { checkout, loading, error } = useCheckout();
 
-  if (!loaded) return <div className="mt-10 h-40 animate-pulse rounded-xl bg-surface" />;
+  if (!loaded) return <div className="mt-10 h-40 animate-pulse bg-surface" />;
 
   if (items.length === 0) {
     return (
-      <div className="mt-10 rounded-xl border border-line px-6 py-16 text-center">
+      <div className="mt-10 border border-line px-6 py-16 text-center">
         <p className="text-xl font-semibold">Votre panier est vide</p>
         <p className="mt-2 text-muted">Parcourez nos collections ou créez votre propre vêtement.</p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <Link href="/collections/tous" className="btn btn-primary">Découvrir la boutique</Link>
+          <Link href="/collections/tous" className="btn">Découvrir la boutique</Link>
           <Link href="/personnaliser" className="btn btn-outline">Créer mon vêtement</Link>
         </div>
       </div>
@@ -42,7 +42,7 @@ export function CartView() {
           ← Continuer mes achats
         </Link>
       </div>
-      <aside className="h-fit space-y-4 rounded-xl bg-surface p-6 lg:sticky lg:top-28">
+      <aside className="h-fit space-y-4 bg-surface p-6 lg:sticky lg:top-28">
         <div className="flex justify-between text-sm">
           <span className="text-muted">Sous-total</span>
           <span>{formatPrice(subtotal)}</span>
@@ -55,7 +55,7 @@ export function CartView() {
           <span>Total estimé</span>
           <span>{formatPrice(subtotal)}</span>
         </div>
-        <button type="button" onClick={() => checkout(items)} disabled={loading} className="btn btn-primary w-full">
+        <button type="button" onClick={() => checkout(items)} disabled={loading} className="btn w-full">
           {loading ? "Redirection…" : "Passer au paiement"}
         </button>
         {error && <p className="text-sm text-danger" role="alert">{error}</p>}

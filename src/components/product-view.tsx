@@ -17,13 +17,14 @@ import { WishlistButton } from "./wishlist-button";
 type Props = {
   product: Product;
   initialVariantId?: number;
+  /** Nom de la collection (pour le fil d’Ariane côté page). */
   collection?: string;
   rating?: { average: number; count: number };
   children?: React.ReactNode;
 };
 
 /** Fiche produit : galerie synchronisée avec les variantes, options, quantité, ajout au panier et achat immédiat. */
-export function ProductView({ product, initialVariantId, collection, rating, children }: Props) {
+export function ProductView({ product, initialVariantId, rating, children }: Props) {
   const { add } = useCart();
   const { checkout, loading, error } = useCheckout();
   const start =
@@ -106,10 +107,10 @@ export function ProductView({ product, initialVariantId, collection, rating, chi
   const hasSizes = product.options.some((o) => isSizeOption(o) && o.values.length > 1);
 
   return (
-    <div className="grid gap-8 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-14">
+    <div className="grid gap-8 md:grid-cols-[1.4fr_1fr] md:gap-16">
       {/* Galerie */}
-      <div className="md:sticky md:top-28 md:self-start">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-surface">
+      <div>
+        <div className="relative aspect-square overflow-hidden bg-surface">
           {image && <Image key={image.src} src={image.src} alt={product.title} fill priority sizes="(max-width: 768px) 100vw, 55vw" className="object-cover" />}
         </div>
         {product.images.length > 1 && (
@@ -121,7 +122,7 @@ export function ProductView({ product, initialVariantId, collection, rating, chi
                 onClick={() => setImageIndex(i)}
                 aria-label={`Image ${i + 1}`}
                 aria-current={i === imageIndex}
-                className={`relative aspect-[4/5] w-20 shrink-0 overflow-hidden rounded-lg bg-surface ring-offset-2 ring-offset-bg ${i === imageIndex ? "ring-2 ring-fg" : "opacity-70 hover:opacity-100"}`}
+                className={`relative aspect-square w-20 shrink-0 overflow-hidden bg-surface ring-offset-2 ring-offset-bg ${i === imageIndex ? "ring-2 ring-fg" : "opacity-70 hover:opacity-100"}`}
               >
                 <Image src={img.src} alt="" fill sizes="80px" className="object-cover" />
               </button>
@@ -131,16 +132,17 @@ export function ProductView({ product, initialVariantId, collection, rating, chi
       </div>
 
       {/* Informations */}
-      <div>
-        <p className="eyebrow">{collection ?? "Ewo"}</p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">{product.title}</h1>
+      <div className="md:sticky md:top-32 md:self-start">
+        <h1 className="text-3xl md:text-[40px]">{product.title}</h1>
         {rating && rating.count > 0 && (
           <a href="#avis" className="mt-3 inline-flex items-center gap-2 text-sm">
             <Stars rating={rating.average} /> <span className="text-muted underline underline-offset-4">{rating.count} avis</span>
           </a>
         )}
-        <p className="mt-4 text-2xl">{variant ? formatPrice(variant.price) : "—"}</p>
-        <p className="mt-1 text-xs text-muted">Taxes incluses. Imprimé à la demande pour vous.</p>
+        <p className="mt-4 text-lg text-fg">{variant ? formatPrice(variant.price) : "—"}</p>
+        <p className="mt-2 text-sm">
+          {canBuy ? <span className="text-success">● Disponible, imprimé à la demande</span> : <span className="text-muted">Épuisé</span>}
+        </p>
 
         <div className="mt-8 space-y-6">
           {product.options.map((option, oi) => {
@@ -176,8 +178,8 @@ export function ProductView({ product, initialVariantId, collection, rating, chi
                         type="button"
                         onClick={() => choose(oi, v.id)}
                         aria-pressed={active}
-                        className={`min-w-14 rounded-lg border px-4 py-2.5 text-sm transition ${
-                          active ? "border-fg bg-fg text-bg" : "border-line hover:border-fg"
+                        className={`min-w-14 border px-4 py-2.5 text-sm transition ${
+                          active ? "border-fg bg-fg text-bg" : "border-line-strong hover:border-fg"
                         } ${ok ? "" : "text-muted line-through decoration-1"}`}
                       >
                         {v.title}
@@ -197,21 +199,21 @@ export function ProductView({ product, initialVariantId, collection, rating, chi
 
         <div className="mt-8 space-y-3">
           <div className="flex gap-3">
-            <button ref={buttonRef} type="button" onClick={handleAdd} disabled={!canBuy} className="btn btn-outline flex-1 py-3.5">
+            <button ref={buttonRef} type="button" onClick={handleAdd} disabled={!canBuy} className="btn btn-outline flex-1">
               {!variant ? "Combinaison indisponible" : !canBuy ? "Épuisé" : "Ajouter au panier"}
             </button>
             <WishlistButton product={toSnapshot(product)} variant="inline" />
           </div>
-          <button type="button" onClick={handleBuyNow} disabled={!canBuy || loading} className="btn btn-primary w-full py-3.5">
+          <button type="button" onClick={handleBuyNow} disabled={!canBuy || loading} className="btn w-full">
             {loading ? "Redirection…" : "Acheter maintenant"}
           </button>
           {error && <p className="text-sm text-danger" role="alert">{error}</p>}
         </div>
 
         <ul className="mt-8 grid grid-cols-3 gap-3 text-center text-xs text-muted">
-          <li className="rounded-lg bg-surface px-2 py-4"><SparkIcon className="mx-auto mb-2 h-5 w-5 text-fg" />Imprimé à la demande</li>
-          <li className="rounded-lg bg-surface px-2 py-4"><ShieldIcon className="mx-auto mb-2 h-5 w-5 text-fg" />Paiement sécurisé</li>
-          <li className="rounded-lg bg-surface px-2 py-4"><ChatIcon className="mx-auto mb-2 h-5 w-5 text-fg" />Support WhatsApp</li>
+          <li className=" bg-surface px-2 py-4"><SparkIcon className="mx-auto mb-2 h-5 w-5 text-fg" />Imprimé à la demande</li>
+          <li className=" bg-surface px-2 py-4"><ShieldIcon className="mx-auto mb-2 h-5 w-5 text-fg" />Paiement sécurisé</li>
+          <li className=" bg-surface px-2 py-4"><ChatIcon className="mx-auto mb-2 h-5 w-5 text-fg" />Support WhatsApp</li>
         </ul>
 
         <div className="mt-8">{children}</div>
@@ -224,7 +226,7 @@ export function ProductView({ product, initialVariantId, collection, rating, chi
             <p className="truncate text-sm font-medium">{product.title}</p>
             <p className="text-xs text-muted">{variant ? `${variant.title} · ${formatPrice(variant.price)}` : ""}</p>
           </div>
-          <button type="button" onClick={handleAdd} disabled={!canBuy} className="btn btn-primary px-5 py-3">
+          <button type="button" onClick={handleAdd} disabled={!canBuy} className="btn px-5 py-3">
             Ajouter
           </button>
         </div>

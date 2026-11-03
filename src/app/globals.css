@@ -1,151 +1,223 @@
 @import "tailwindcss";
 
 /*
- * Thème clair par défaut (style boutique Shopify), thème sombre si le système
- * le demande ou via <html data-theme="dark">.
+ * Style inspiré d'ATAGUISE Boutique (thème Shopify Dawn) : fond blanc, bordures
+ * fines, boutons rectangulaires, titres fins espacés. Couleurs de la marque Ewo :
+ * orange (boutons, bandeaux), noir (texte), jaune (touches), crème (fonds).
  */
 :root {
   --bg: #ffffff;
-  --surface: #f5f4f1;
-  --surface-2: #ece9e3;
-  --fg: #121212;
-  --muted: #6b6862;
-  --line: #e6e3dd;
+  --surface: #f6f3ef;
+  --surface-2: #ece7e0;
+  --cream: #fff3e6;
+  --fg: #1c1a17;
+  --fg-soft: rgb(28 26 23 / 0.78);
+  --muted: rgb(28 26 23 / 0.56);
+  --line: rgb(28 26 23 / 0.12);
+  --line-strong: rgb(28 26 23 / 0.3);
   --accent: #e8680c;
+  --accent-deep: #c4520a;
   --accent-fg: #ffffff;
-  --success: #1f8a4c;
+  --sun: #fccc1a;
+  --success: #1f6f43;
   --danger: #c0392b;
   color-scheme: light;
-}
-
-:root[data-theme="dark"] {
-  --bg: #0e0e10;
-  --surface: #18181b;
-  --surface-2: #232328;
-  --fg: #f5f3ef;
-  --muted: #a3a09a;
-  --line: #2a2a2f;
-  --accent: #f47a1f;
-  --accent-fg: #ffffff;
-  --success: #3fbf72;
-  --danger: #ef6b5b;
-  color-scheme: dark;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0e0e10;
-    --surface: #18181b;
-    --surface-2: #232328;
-    --fg: #f5f3ef;
-    --muted: #a3a09a;
-    --line: #2a2a2f;
-    --accent: #f47a1f;
-    --accent-fg: #ffffff;
-    --success: #3fbf72;
-    --danger: #ef6b5b;
-    color-scheme: dark;
-  }
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
+  --color-cream: var(--cream);
   --color-fg: var(--fg);
+  --color-fg-soft: var(--fg-soft);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
   --color-accent-fg: var(--accent-fg);
+  --color-sun: var(--sun);
   --color-success: var(--success);
   --color-danger: var(--danger);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-assistant), "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--bg);
+  color: var(--fg-soft);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+}
+
+h1,
+h2,
+h3,
+h4 {
   color: var(--fg);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  font-weight: 400;
 }
 
 @layer components {
   .page {
     width: 100%;
-    max-width: 80rem;
+    max-width: 1200px;
     margin-inline: auto;
     padding-inline: 1rem;
   }
   @media (min-width: 768px) {
     .page {
-      padding-inline: 2rem;
+      padding-inline: 3rem;
+    }
+  }
+
+  .h-display {
+    font-size: 2.25rem;
+  }
+  .h-section {
+    font-size: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .h-display {
+      font-size: 52px;
+    }
+    .h-section {
+      font-size: 30px;
     }
   }
 
   .btn {
     display: inline-flex;
+    min-height: 46px;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border-radius: 0.5rem;
-    padding: 0.85rem 1.5rem;
-    font-size: 0.925rem;
-    font-weight: 600;
-    line-height: 1.25rem;
-    transition: opacity 0.15s, background-color 0.15s, border-color 0.15s, transform 0.15s;
-    cursor: pointer;
-  }
-  .btn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-  }
-  .btn:active:not(:disabled) {
-    transform: scale(0.98);
-  }
-  .btn-primary {
-    background: var(--fg);
-    color: var(--bg);
-  }
-  .btn-primary:hover:not(:disabled) {
-    opacity: 0.86;
-  }
-  .btn-accent {
+    border: 1px solid var(--accent);
     background: var(--accent);
     color: var(--accent-fg);
+    padding: 0 2rem;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s, color 0.15s;
+    cursor: pointer;
   }
-  .btn-accent:hover:not(:disabled) {
-    opacity: 0.9;
+  .btn:hover:not(:disabled) {
+    background: var(--accent-deep);
+    border-color: var(--accent-deep);
   }
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  /* Alias conservés : primaire et accent = orange Ewo. */
   .btn-outline {
-    border: 1px solid var(--fg);
-    color: var(--fg);
+    background: var(--bg);
+    color: var(--accent-deep);
   }
   .btn-outline:hover:not(:disabled) {
+    background: var(--bg);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .btn-dark {
     background: var(--fg);
-    color: var(--bg);
+    border-color: var(--fg);
+    color: #fff;
+  }
+  .btn-dark:hover:not(:disabled) {
+    background: #000;
+    border-color: #000;
+  }
+  .btn-sun {
+    background: var(--sun);
+    border-color: var(--sun);
+    color: var(--fg);
+  }
+  .btn-sun:hover:not(:disabled) {
+    background: #fff;
+    border-color: #fff;
+  }
+  .btn-sm {
+    min-height: 36px;
+    padding: 0 1rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.06em;
+  }
+
+  .link {
+    color: var(--accent-deep);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .link:hover {
+    text-decoration-thickness: 2px;
   }
 
   .eyebrow {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--accent-deep);
   }
 
   .field {
     width: 100%;
-    border-radius: 0.5rem;
-    border: 1px solid var(--line);
+    min-height: 46px;
+    border: 1px solid var(--line-strong);
     background: var(--bg);
-    padding: 0.75rem 0.9rem;
-    font-size: 0.925rem;
+    padding: 0.6rem 1rem;
+    font-size: 15px;
+    color: var(--fg);
     outline: none;
+    transition: box-shadow 0.15s;
   }
   .field:focus {
-    border-color: var(--fg);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
   }
 
-  /* Contenu HTML des descriptions produit et des pages légales. */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    border-radius: 9999px;
+    border: 1px solid var(--line-strong);
+    padding: 0.125rem 0.75rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: var(--fg);
+    background: var(--bg);
+  }
+  .badge-dark {
+    border-color: var(--fg);
+    background: var(--fg);
+    color: #fff;
+  }
+  .badge-sale {
+    border-color: var(--accent-deep);
+    background: var(--accent-deep);
+    color: #fff;
+  }
+
+  .notice {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: var(--fg);
+  }
+
+  /* Contenu HTML des descriptions produit. */
   .rte p + p,
   .rte p + ul,
   .rte ul + p {
@@ -170,17 +242,8 @@ details[open] .chevron {
   transform: rotate(180deg);
 }
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 dialog::backdrop {
-  background: rgb(0 0 0 / 0.5);
+  background: rgb(28 26 23 / 0.4);
 }
 
 @media (prefers-reduced-motion: reduce) {

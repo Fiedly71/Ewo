@@ -41,7 +41,7 @@ export function ReviewForm({ productId }: { productId: string }) {
     }
   }
 
-  if (status === "done") return <p className="rounded-lg bg-surface p-4 text-sm">{message}</p>;
+  if (status === "done") return <p className=" bg-surface p-4 text-sm">{message}</p>;
   if (!open)
     return (
       <button type="button" onClick={() => setOpen(true)} className="btn btn-outline">
@@ -50,7 +50,7 @@ export function ReviewForm({ productId }: { productId: string }) {
     );
 
   return (
-    <form onSubmit={submit} className="space-y-4 rounded-xl border border-line p-5">
+    <form onSubmit={submit} className="space-y-4 border border-line p-5">
       <fieldset>
         <legend className="mb-2 text-sm font-medium">Votre note</legend>
         <div className="flex text-accent" onMouseLeave={() => setHover(0)}>
@@ -78,7 +78,7 @@ export function ReviewForm({ productId }: { productId: string }) {
       {/* Champ piège anti-spam, invisible pour les humains. */}
       <input name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       <div className="flex items-center gap-3">
-        <button type="submit" disabled={status === "loading"} className="btn btn-primary">
+        <button type="submit" disabled={status === "loading"} className="btn">
           {status === "loading" ? "Envoi…" : "Publier mon avis"}
         </button>
         <button type="button" onClick={() => setOpen(false)} className="text-sm text-muted underline underline-offset-4">

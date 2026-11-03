@@ -11,10 +11,18 @@ export function AnnouncementBar({ messages }: { messages: string[] }) {
   }, [messages.length]);
   if (messages.length === 0) return null;
   return (
-    <div className="bg-fg text-bg">
-      <p key={index} className="page py-2.5 text-center text-xs font-medium tracking-wide" aria-live="polite">
-        {messages[index]}
-      </p>
-    </div>
+    <>
+      <div className="bg-accent text-white">
+        <p key={index} className="page py-2.5 text-center text-[13px] tracking-[0.08em]" aria-live="polite">
+          {messages[index]}
+        </p>
+      </div>
+      {/* liseré aux couleurs du logo Ewo */}
+      <div className="flex h-[3px]" aria-hidden="true">
+        <span className="flex-1 bg-fg" />
+        <span className="flex-1 bg-sun" />
+        <span className="flex-1 bg-accent-deep" />
+      </div>
+    </>
   );
 }

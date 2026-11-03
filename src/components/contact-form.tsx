@@ -38,7 +38,7 @@ export function ContactForm() {
         <span className="mb-1.5 block font-medium">Message</span>
         <textarea name="message" required maxLength={2000} rows={5} className="field" />
       </label>
-      <button type="submit" className="btn btn-primary w-full">Envoyer sur WhatsApp</button>
+      <button type="submit" className="btn w-full">Envoyer sur WhatsApp</button>
     </form>
   );
 }

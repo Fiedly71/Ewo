@@ -10,10 +10,10 @@ export function WishlistView() {
   const { items, remove } = useWishlist();
   if (items.length === 0) {
     return (
-      <div className="mt-10 rounded-xl border border-line px-6 py-16 text-center">
+      <div className="mt-10 border border-line px-6 py-16 text-center">
         <p className="text-xl font-semibold">Aucun favori pour l&apos;instant</p>
         <p className="mt-2 text-muted">Touchez le cœur sur un produit pour le retrouver ici.</p>
-        <Link href="/collections/tous" className="btn btn-primary mt-6">Découvrir la boutique</Link>
+        <Link href="/collections/tous" className="btn mt-6">Découvrir la boutique</Link>
       </div>
     );
   }
@@ -22,7 +22,7 @@ export function WishlistView() {
       {items.map((p) => (
         <div key={p.id} className="group relative">
           <Link href={`/produits/${p.id}`} className="block">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-surface">
+            <div className="relative aspect-[4/5] overflow-hidden bg-surface">
               {p.image && <Image src={p.image} alt={p.title} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition duration-500 group-hover:scale-[1.03]" />}
             </div>
             <p className="mt-3 text-sm font-medium">{p.title}</p>

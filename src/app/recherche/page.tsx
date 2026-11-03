@@ -12,8 +12,8 @@ export default async function SearchPage({ searchParams }: PageProps<"/recherche
   const results = q ? await searchProducts(q) : [];
   return (
     <div className="page py-10">
-      <h1 className="text-center text-4xl font-bold tracking-tight">Recherche</h1>
-      <Form action="/recherche" className="mx-auto mt-6 flex max-w-xl items-center rounded-lg border border-line focus-within:border-fg">
+      <h1 className="text-center text-3xl md:text-[40px]">Recherche</h1>
+      <Form action="/recherche" className="mx-auto mt-6 flex max-w-xl items-center border border-line focus-within:border-fg">
         <input name="q" defaultValue={q} type="search" placeholder="Rechercher un produit" aria-label="Rechercher un produit" className="flex-1 bg-transparent px-4 py-3 outline-none" />
         <button type="submit" aria-label="Rechercher" className="grid h-12 w-12 place-items-center">
           <SearchIcon />

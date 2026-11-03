@@ -12,7 +12,7 @@ export function CartLine({ item, onNavigate, compact }: { item: CartItem; onNavi
   const img = item.kind === "custom" ? item.designUrl : item.image;
   return (
     <li className="flex gap-4 py-5">
-      <Link href={href} onClick={onNavigate} className={`relative shrink-0 overflow-hidden rounded-lg bg-surface ${compact ? "h-24 w-20" : "h-32 w-28"}`}>
+      <Link href={href} onClick={onNavigate} className={`relative shrink-0 overflow-hidden bg-surface ${compact ? "h-24 w-20" : "h-32 w-28"}`}>
         {/* eslint-disable-next-line @next/next/no-img-element -- images Printify, locales ou téléversées */}
         <img src={img} alt="" className={`h-full w-full ${item.kind === "custom" ? "object-contain p-2" : "object-cover"}`} />
       </Link>
@@ -23,7 +23,7 @@ export function CartLine({ item, onNavigate, compact }: { item: CartItem; onNavi
               {item.title}
             </Link>
             <p className="mt-0.5 text-sm text-muted">{item.variantTitle}</p>
-            {item.kind === "custom" && <p className="mt-1 inline-block rounded bg-accent/10 px-1.5 py-0.5 text-[11px] font-semibold text-accent">Personnalisé</p>}
+            {item.kind === "custom" && <p className="mt-1 inline-block bg-accent/10 px-1.5 py-0.5 text-[11px] font-semibold text-accent">Personnalisé</p>}
           </div>
           <p className="shrink-0 text-sm font-medium">{formatPrice(item.price * item.quantity)}</p>
         </div>

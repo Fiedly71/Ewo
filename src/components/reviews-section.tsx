@@ -5,7 +5,7 @@ import { Stars } from "./stars";
 export function ReviewsSection({ productId, reviews, summary }: { productId: string; reviews: Review[]; summary: ReviewSummary }) {
   return (
     <section id="avis" className="page mt-20 scroll-mt-28">
-      <h2 className="text-2xl font-bold tracking-tight">Avis clients</h2>
+      <h2 className="text-2xl">Avis clients</h2>
       <div className="mt-6 grid gap-10 md:grid-cols-[280px_1fr]">
         <div>
           {summary.count > 0 ? (

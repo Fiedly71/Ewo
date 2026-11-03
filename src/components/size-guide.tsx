@@ -33,7 +33,7 @@ export function SizeGuide({ kind = "tshirt" }: { kind?: keyof typeof GUIDES }) {
       <dialog
         ref={ref}
         onClick={(e) => e.target === ref.current && ref.current?.close()}
-        className="m-auto w-[min(92vw,560px)] rounded-xl bg-bg p-0 text-fg shadow-2xl"
+        className="m-auto w-[min(92vw,560px)] bg-bg p-0 text-fg shadow-2xl"
       >
         <div className="flex items-center justify-between border-b border-line px-6 py-4">
           <p className="text-lg font-semibold">Guide des tailles</p>

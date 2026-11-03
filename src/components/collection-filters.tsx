@@ -52,7 +52,7 @@ export function SortSelect({ active }: { active: ActiveFilters }) {
       <select
         value={active.sort}
         onChange={(e) => go(paramsFrom({ ...active, sort: e.target.value }))}
-        className="rounded-lg border border-line bg-bg px-3 py-2 text-sm outline-none focus:border-fg"
+        className="max-w-[9.5rem] border border-line-strong bg-bg px-3 py-2 text-sm outline-none focus:border-fg sm:max-w-none"
       >
         {SORTS.map((s) => (
           <option key={s.value} value={s.value}>{s.label}</option>
@@ -98,7 +98,7 @@ export function FiltersPanel({ facets, active, idPrefix = "f" }: { facets: Facet
               const on = active.sizes.includes(s.value);
               return (
                 <button key={s.value} type="button" aria-pressed={on} onClick={() => toggle("sizes", s.value)}
-                  className={`min-w-12 rounded-lg border px-3 py-2 text-sm ${on ? "border-fg bg-fg text-bg" : "border-line hover:border-fg"}`}>
+                  className={`min-w-12 border px-3 py-2 text-sm ${on ? "border-fg bg-fg text-bg" : "border-line hover:border-fg"}`}>
                   {s.value}
                 </button>
               );
@@ -158,7 +158,7 @@ export function MobileFilters({ facets, active, activeCount }: { facets: Facets;
   }, [open]);
   return (
     <>
-      <button type="button" onClick={() => setOpen(true)} className="flex items-center gap-2 rounded-lg border border-line px-3 py-2 text-sm lg:hidden">
+      <button type="button" onClick={() => setOpen(true)} className="flex items-center gap-2 border border-line px-3 py-2 text-sm lg:hidden">
         <FilterIcon /> Filtres {activeCount > 0 && <span className="grid h-5 min-w-5 place-items-center rounded-full bg-fg px-1 text-[11px] text-bg">{activeCount}</span>}
       </button>
       {open && (
@@ -175,7 +175,7 @@ export function MobileFilters({ facets, active, activeCount }: { facets: Facets;
               <FiltersPanel facets={facets} active={active} idPrefix="m" />
             </div>
             <div className="border-t border-line p-5">
-              <button type="button" onClick={() => setOpen(false)} className="btn btn-primary w-full">Voir les résultats</button>
+              <button type="button" onClick={() => setOpen(false)} className="btn w-full">Voir les résultats</button>
             </div>
           </div>
         </div>

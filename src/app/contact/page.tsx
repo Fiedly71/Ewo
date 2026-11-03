@@ -16,7 +16,7 @@ export default function ContactPage() {
     <div className="page grid gap-12 py-10 md:grid-cols-2 md:py-16">
       <div>
         <p className="eyebrow">Contact</p>
-        <h1 className="mt-3 text-4xl font-black tracking-tight md:text-5xl">
+        <h1 className="mt-3 text-4xl font-normal md:text-5xl">
           Parlons de votre <span className="text-accent">projet</span>
         </h1>
         <p className="mt-5 max-w-md text-muted">
@@ -42,7 +42,7 @@ export default function ContactPage() {
           </div>
         </dl>
       </div>
-      <div className="rounded-2xl bg-surface p-6 md:p-8">
+      <div className=" bg-surface p-6 md:p-8">
         <h2 className="text-xl font-semibold">Envoyer un message</h2>
         <p className="mt-1 text-sm text-muted">Votre message s&apos;ouvre dans WhatsApp, prêt à être envoyé.</p>
         <ContactForm />

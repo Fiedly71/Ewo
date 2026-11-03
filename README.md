@@ -14,7 +14,7 @@ Fonctions boutique (style thème Shopify) :
 - Favoris (stockés dans le navigateur), newsletter et avis (Supabase), codes promo Stripe
 - Pages À propos, FAQ, Contact (message WhatsApp prérempli), Livraison, Retours, CGV, Confidentialité, Mentions légales
 - SEO : métadonnées, sitemap, robots, image Open Graph, données structurées (Product, Breadcrumb, FAQ, Organization)
-- Thème clair / sombre (suit le système), Vercel Analytics
+- Style inspiré d’ATAGUISE Boutique (thème Shopify Dawn) : police Assistant, boutons rectangulaires, orange Ewo ; Vercel Analytics
 
 Stack : Next.js 16 (App Router), React 19, Tailwind CSS 4, Stripe, Zod, Supabase (REST, facultatif).
 

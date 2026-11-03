@@ -31,7 +31,7 @@ export default async function PolicyPage({ params }: PageProps<"/politiques/[slu
         </ul>
       </nav>
       <article className="max-w-2xl">
-        <h1 className="text-4xl font-bold tracking-tight">{policy.title}</h1>
+        <h1 className="text-3xl md:text-[40px]">{policy.title}</h1>
         <p className="mt-2 text-sm text-muted">Dernière mise à jour : {policy.updated}</p>
         {policy.sections.map((s) => (
           <section key={s.heading} className="mt-10">

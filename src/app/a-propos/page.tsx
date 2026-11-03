@@ -21,7 +21,7 @@ export default function AboutPage() {
         <div className="page py-20 text-center md:py-28">
           <p className="eyebrow">Notre histoire</p>
           {/* Texte de présentation à personnaliser avec l'histoire réelle de la marque. */}
-          <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-black tracking-tight text-balance md:text-6xl">
+          <h1 className="mx-auto mt-4 max-w-3xl text-4xl font-normal text-balance md:text-6xl">
             Des vêtements qui vous <span className="text-accent">ressemblent</span>.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted">
@@ -31,7 +31,7 @@ export default function AboutPage() {
       </section>
       <section className="page mt-20 grid gap-10 md:grid-cols-3">
         {values.map(({ icon: Icon, title, text }) => (
-          <div key={title} className="rounded-xl border border-line p-8">
+          <div key={title} className=" border border-line p-8">
             <Icon className="h-8 w-8 text-accent" />
             <p className="mt-5 text-lg font-semibold">{title}</p>
             <p className="mt-2 text-sm text-muted">{text}</p>
@@ -39,9 +39,9 @@ export default function AboutPage() {
         ))}
       </section>
       <section className="page mt-20 text-center">
-        <h2 className="text-3xl font-bold tracking-tight">Prêt·e à créer ?</h2>
+        <h2 className="text-3xl">Prêt·e à créer ?</h2>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <Link href="/personnaliser" className="btn btn-primary">Créer mon vêtement</Link>
+          <Link href="/personnaliser" className="btn">Créer mon vêtement</Link>
           <Link href="/collections/tous" className="btn btn-outline">Voir la boutique</Link>
         </div>
       </section>

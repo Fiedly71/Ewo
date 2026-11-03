@@ -90,7 +90,7 @@ export function ProductListing({ products, searchParams, basePath }: { products:
                 key={n}
                 href={href({ page: n })}
                 aria-current={n === current ? "page" : undefined}
-                className={`grid h-10 w-10 place-items-center rounded-lg text-sm ${n === current ? "bg-fg text-bg" : "border border-line hover:border-fg"}`}
+                className={`grid h-10 w-10 place-items-center text-sm ${n === current ? "bg-fg text-bg" : "border border-line hover:border-fg"}`}
               >
                 {n}
               </Link>

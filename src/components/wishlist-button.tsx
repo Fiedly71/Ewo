@@ -10,7 +10,7 @@ export function WishlistButton({ product, variant = "overlay" }: { product: Prod
   const label = active ? "Retirer des favoris" : "Ajouter aux favoris";
   if (variant === "inline") {
     return (
-      <button type="button" onClick={() => toggle(product)} aria-pressed={active} aria-label={label} className="grid h-12 w-12 shrink-0 place-items-center rounded-lg border border-line hover:border-fg">
+      <button type="button" onClick={() => toggle(product)} aria-pressed={active} aria-label={label} className="grid min-h-[46px] w-12 shrink-0 place-items-center border border-line-strong hover:border-fg">
         <HeartIcon filled={active} className={`h-5 w-5 ${active ? "text-accent" : ""}`} />
       </button>
     );
@@ -25,7 +25,7 @@ export function WishlistButton({ product, variant = "overlay" }: { product: Prod
       }}
       aria-pressed={active}
       aria-label={label}
-      className="absolute top-3 right-3 z-10 grid h-9 w-9 place-items-center rounded-full bg-bg/90 shadow-sm backdrop-blur transition hover:scale-110"
+      className="absolute top-3 right-3 z-10 grid h-9 w-9 place-items-center rounded-full border border-line bg-bg transition hover:border-fg"
     >
       <HeartIcon filled={active} className={`h-[18px] w-[18px] ${active ? "text-accent" : ""}`} />
     </button>
