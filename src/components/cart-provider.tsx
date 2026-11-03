@@ -7,7 +7,12 @@ type CartContextValue = {
   items: CartItem[];
   count: number;
   subtotal: number;
-  add: (item: CartItem) => void;
+  loaded: boolean;
+  drawerOpen: boolean;
+  openDrawer: () => void;
+  closeDrawer: () => void;
+  /** Ajoute un article et ouvre le panier latéral (sauf si silent). */
+  add: (item: CartItem, options?: { silent?: boolean }) => void;
   setQuantity: (key: string, quantity: number) => void;
   remove: (key: string) => void;
   clear: () => void;
@@ -15,16 +20,19 @@ type CartContextValue = {
 
 const CartContext = createContext<CartContextValue | null>(null);
 const STORAGE_KEY = "ewo-cart";
+export const MAX_QTY = 20;
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [loaded, setLoaded] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
+      const parsed: unknown = saved ? JSON.parse(saved) : [];
       // eslint-disable-next-line react-hooks/set-state-in-effect -- lecture unique du panier sauvegardé
-      if (saved) setItems(JSON.parse(saved));
+      if (Array.isArray(parsed)) setItems(parsed as CartItem[]);
     } catch {}
     setLoaded(true);
   }, []);
@@ -36,17 +44,32 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     } catch {}
   }, [items, loaded]);
 
-  const add = useCallback((item: CartItem) => {
+  // Synchronise le panier entre plusieurs onglets.
+  useEffect(() => {
+    function onStorage(e: StorageEvent) {
+      if (e.key !== STORAGE_KEY) return;
+      try {
+        setItems(e.newValue ? JSON.parse(e.newValue) : []);
+      } catch {}
+    }
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
+
+  const add = useCallback((item: CartItem, options?: { silent?: boolean }) => {
     setItems((prev) => {
       const existing = prev.find((i) => i.key === item.key);
-      if (!existing) return [...prev, item];
-      return prev.map((i) => (i.key === item.key ? { ...i, quantity: i.quantity + item.quantity } : i));
+      if (!existing) return [...prev, { ...item, quantity: Math.min(MAX_QTY, item.quantity) }];
+      return prev.map((i) =>
+        i.key === item.key ? { ...i, quantity: Math.min(MAX_QTY, i.quantity + item.quantity) } : i,
+      );
     });
+    if (!options?.silent) setDrawerOpen(true);
   }, []);
 
   const setQuantity = useCallback((key: string, quantity: number) => {
     setItems((prev) =>
-      prev.map((i) => (i.key === key ? { ...i, quantity: Math.max(1, Math.min(20, quantity)) } : i)),
+      prev.map((i) => (i.key === key ? { ...i, quantity: Math.max(1, Math.min(MAX_QTY, quantity)) } : i)),
     );
   }, []);
 
@@ -57,18 +80,24 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     } catch {}
     setItems([]);
   }, []);
+  const openDrawer = useCallback(() => setDrawerOpen(true), []);
+  const closeDrawer = useCallback(() => setDrawerOpen(false), []);
 
   const value = useMemo(
     () => ({
       items,
       count: items.reduce((n, i) => n + i.quantity, 0),
       subtotal: items.reduce((n, i) => n + i.price * i.quantity, 0),
+      loaded,
+      drawerOpen,
+      openDrawer,
+      closeDrawer,
       add,
       setQuantity,
       remove,
       clear,
     }),
-    [items, add, setQuantity, remove, clear],
+    [items, loaded, drawerOpen, openDrawer, closeDrawer, add, setQuantity, remove, clear],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
